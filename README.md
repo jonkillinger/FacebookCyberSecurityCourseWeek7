@@ -38,36 +38,24 @@ Time spent: **X** hours spent in total
   - [ ] Affected source code:
     - [Link 1](https://core.trac.wordpress.org/browser/tags/4.9/src/wp-includes/class-wp-session-tokens.php#L48)
 1. (Required) Vulnerability Name or ID
-  - [ ] Summary: 
-    - Vulnerability types:
-    - Tested in version:
-    - Fixed in version: 
-  - [ ] GIF Walkthrough: 
+  - [ ] Summary: It is possible to enumerate through author archives of wordpress. This can be performed automatically by the wpscan utility, but underneath involves sending requests to the site with different id values. Possible fixes involve firewall implementations and / or modifying the htaccess file with code like:
+  ```
+  # Block User ID Phishing Requests
+<IfModule mod_rewrite.c>
+	RewriteCond %{QUERY_STRING} ^author=([0-9]*) [NC]
+	RewriteRule .* http://example.com/? [L,R=302]
+</IfModule>
+```
+    - Vulnerability types: User Enumeration
+    - Tested in version: 3.9
+    - Fixed in version: ...
+  - [ ] GIF Walkthrough: ![Gif of 3](https://media.giphy.com/media/mMEwgIz3SFq2wTE2PC/giphy.gif)
+    - User Enumeration Manually: ![Gift of 4](https://media.giphy.com/media/4Z1OECCGHcfTk1Ds96/giphy.gif)
   - [ ] Steps to recreate: 
+    - Using WPScan shell, enter command: ``` wpscan --url http://www,wordpressurl.com --enumerate u ```
+    - Without proper safeguards, wpscan will output listing of names.
   - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
-1. (Optional) Vulnerability Name or ID
-  - [ ] Summary: 
-    - Vulnerability types:
-    - Tested in version:
-    - Fixed in version: 
-  - [ ] GIF Walkthrough: 
-  - [ ] Steps to recreate: 
-  - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
-1. (Optional) Vulnerability Name or ID
-  - [ ] Summary: 
-    - Vulnerability types:
-    - Tested in version:
-    - Fixed in version: 
-  - [ ] GIF Walkthrough: 
-  - [ ] Steps to recreate: 
-  - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php) 
-
-## Assets
-
-List any additional assets, such as scripts or files
+    - [Link 1](https://core.trac.wordpress.org/browser/tags/4.9/src/wp-includes/author-template.php#L401)
 
 ## Resources
 
@@ -76,13 +64,9 @@ List any additional assets, such as scripts or files
 
 GIFs created with [LiceCap](http://www.cockos.com/licecap/).
 
-## Notes
-
-Describe any challenges encountered while doing the work
-
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2018] [name of copyright owner]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

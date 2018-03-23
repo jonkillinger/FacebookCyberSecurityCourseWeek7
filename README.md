@@ -24,15 +24,19 @@ Time spent: **X** hours spent in total
     - [Link 2](https://core.trac.wordpress.org/browser/tags/4.9/src/wp-includes/kses.php#L526)
     - [Link 3](https://core.trac.wordpress.org/browser/tags/4.9/src/wp-includes/class-wp-embed.php#L387)
     
-1. (Required) Vulnerability Name or ID
-  - [ ] Summary: 
-    - Vulnerability types:
-    - Tested in version:
-    - Fixed in version: 
-  - [ ] GIF Walkthrough: 
+1. Wordpress Does Not Invalidate Sessions Upon Logout CVE-2012-5868
+  - [ ] Summary: WordPress 3.4.2 fails to invalidate a user’s sessions upon logout. When an administrator explicitly logs out of the admin interface, WordPress clears the client-side cookies, but doesn't invalidate the session id within the application. A malicious user could obtain someones previously authenticated user's session cookie and use it to gain access to the application.
+    - Vulnerability types: User escalation, Session Hijacking, Authentication Bypass
+    - Tested in version: 3.9
+    - Fixed in version: 4.0
+  - [ ] GIF Walkthrough: ![Gif of 2](https://media.giphy.com/media/RkDSrcJj3h6ZdCph5z/giphy.gif)
   - [ ] Steps to recreate: 
+    - Capture cookies by examining GET request sent to http://wpdistillery.vm/wp-admin/profile.php
+    - Log out of wordpress
+    - Replay GET request using same cookies
+    - Access is still permitted.
   - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
+    - [Link 1](https://core.trac.wordpress.org/browser/tags/4.9/src/wp-includes/class-wp-session-tokens.php#L48)
 1. (Required) Vulnerability Name or ID
   - [ ] Summary: 
     - Vulnerability types:

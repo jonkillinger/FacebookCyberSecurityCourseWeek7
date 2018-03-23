@@ -9,7 +9,7 @@ Time spent: **X** hours spent in total
 ## Pentesting Report
 
 1.  Authenticated Stored Cross-Site Scripting (XSS) in YouTube URL Embeds
-  - [ ] Summary: Contributors to the vulnerable site can embed a YouTube link with malicious XSS. 
+  - [ ] Summary: Contributors to the vulnerable site can embed a YouTube link with malicious XSS. This is due to a flaw in regex processing which allowed escape characters to initiate arbitrary code.
     - Vulnerability types: Core vulnerability, Stored XSS
     - Tested in version: 4.2
     - Fixed in version: 4.7.3
@@ -18,8 +18,12 @@ Time spent: **X** hours spent in total
   - [ ] Steps to recreate: 
     - Copy an embedded youtube URL from any video.
     - Create embedded link for wordpress with pattern: ``` [embed src='https://www.youtube.com/embed/w0_QVQEbMas\x3csvg onload=alert(document.cookie)\x3e'][/embed] ```
+    - Paste link into a post on wordpress page and publish.
   - [ ] Affected source code:
-    - [Link 1](https://core.trac.wordpress.org/browser/tags/version/src/source_file.php)
+    - [Link 1](https://core.trac.wordpress.org/browser/tags/4.9/src/wp-includes/embed.php#L227)
+    - [Link 2](https://core.trac.wordpress.org/browser/tags/4.9/src/wp-includes/kses.php#L526)
+    - [Link 3](https://core.trac.wordpress.org/browser/tags/4.9/src/wp-includes/class-wp-embed.php#L387)
+    
 1. (Required) Vulnerability Name or ID
   - [ ] Summary: 
     - Vulnerability types:
